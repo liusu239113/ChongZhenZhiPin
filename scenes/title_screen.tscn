@@ -1,0 +1,267 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://dy1onkta4rvug" path="res://scripts/title_screen.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://o01vtf0387ke" path="res://assets/ui/title/title_home_bg.webp" id="2"]
+[ext_resource type="Texture2D" uid="uid://brwlhcygr6xse" path="res://assets/ui/title/title_home_character.webp" id="3"]
+[ext_resource type="Script" uid="uid://gmlx86cnsj55" path="res://scripts/ui/title_screen_decor.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://c6h1n3wq8l2ea" path="res://assets/ui/title/title_left_bottom_decor.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://dd8vpcfipi8kk" path="res://assets/ui/title/title_left_panel_bg.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://dir631w58e5ax" path="res://assets/ui/czzp-logo.webp" id="7"]
+[ext_resource type="Script" uid="uid://b8vk07kfvrc4a" path="res://scripts/ui/title_atmosphere_layer.gd" id="8"]
+
+[sub_resource type="Shader" id="Shader_leftdecor_fade"]
+code = "shader_type canvas_item;
+
+// 从左到右：左侧保持原不透明，右侧渐隐至完全透明
+uniform float fade_start = 0.0;
+uniform float fade_end = 1.0;
+
+void fragment() {
+	vec4 c = texture(TEXTURE, UV);
+	float t = smoothstep(fade_start, fade_end, UV.x);
+	c.a *= 1.0 - t;
+	COLOR = c;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_leftdecor_fade"]
+shader = SubResource("Shader_leftdecor_fade")
+shader_parameter/fade_start = 0.0
+shader_parameter/fade_end = 0.55
+
+[node name="TitleScreen" type="Control" unique_id=276492683]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1582061300]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="GradientOverlay" type="TextureRect" parent="." unique_id=1591076416]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Vignette" type="ColorRect" parent="." unique_id=222637229]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.188235, 0.141176, 0.0745098, 0.05)
+
+[node name="TitleCharacter" type="TextureRect" parent="." unique_id=1462710020]
+layout_mode = 1
+mouse_filter = 2
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DecorLayer" type="Control" parent="." unique_id=1836535524]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4")
+
+[node name="TopRightMenu" type="HBoxContainer" parent="." unique_id=920473782]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -410.0
+offset_top = 48.0
+offset_right = -214.0
+offset_bottom = 86.0
+grow_horizontal = 0
+theme_override_constants/separation = 14
+alignment = 2
+
+[node name="SettingsButton" type="Button" parent="TopRightMenu" unique_id=1706578096]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "设置"
+
+[node name="LeftBottomDecor" type="TextureRect" parent="." unique_id=83004894]
+material = SubResource("ShaderMaterial_leftdecor_fade")
+clip_contents = true
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 620.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LeftPanel" type="ColorRect" parent="." unique_id=355306536]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 640.0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.02, 0.018, 0.015, 1)
+
+[node name="LeftPanelBg" type="TextureRect" parent="LeftPanel" unique_id=119600563]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LeftOuterLine" type="ColorRect" parent="LeftPanel" unique_id=540256808]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_right = 7.0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.62, 0.48, 0.26, 0.28)
+
+[node name="LeftInnerLine" type="ColorRect" parent="LeftPanel" unique_id=739688923]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = 11.5
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.62, 0.48, 0.26, 0.28)
+
+[node name="RightOuterLine" type="ColorRect" parent="LeftPanel" unique_id=1201893612]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = -4.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.62, 0.48, 0.26, 0.28)
+
+[node name="RightInnerLine" type="ColorRect" parent="LeftPanel" unique_id=1615416028]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.5
+offset_right = -10.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.62, 0.48, 0.26, 0.28)
+
+[node name="VersionLabel" type="Label" parent="." unique_id=116581986]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 53.0
+offset_right = 280.0
+offset_bottom = 81.0
+theme_override_colors/font_color = Color(0.388235, 0.337255, 0.266667, 0.72)
+theme_override_font_sizes/font_size = 12
+text = "版本预览  V0.2.0.2"
+
+[node name="CenterFrame" type="MarginContainer" parent="." unique_id=811256794]
+layout_mode = 1
+offset_left = 56.0
+offset_top = 138.0
+offset_right = 584.0
+offset_bottom = 648.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterFrame" unique_id=1895732929]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Logo" type="TextureRect" parent="CenterFrame/VBoxContainer" unique_id=430048446]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TaglineMargin" type="MarginContainer" parent="CenterFrame/VBoxContainer" unique_id=1969761410]
+layout_mode = 2
+theme_override_constants/margin_top = -42
+
+[node name="Tagline" type="Label" parent="CenterFrame/VBoxContainer/TaglineMargin" unique_id=159834695]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.321569, 0.294118, 0.25098, 0.8)
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Spacer" type="Control" parent="CenterFrame/VBoxContainer" unique_id=1680923039]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CenterFrame/VBoxContainer" unique_id=800593336]
+custom_minimum_size = Vector2(430, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "开 始 游 戏"
+
+[node name="ButtonSpacer" type="Control" parent="CenterFrame/VBoxContainer" unique_id=13722536]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+
+[node name="LoadButton" type="Button" parent="CenterFrame/VBoxContainer" unique_id=650449234]
+custom_minimum_size = Vector2(430, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "读取存档"
+
+[node name="DossierButton" type="Button" parent="CenterFrame/VBoxContainer" unique_id=1581506042]
+custom_minimum_size = Vector2(430, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "过往卷帙"
+
+[node name="ExitButton" type="Button" parent="CenterFrame/VBoxContainer" unique_id=1105197580]
+custom_minimum_size = Vector2(430, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "退出游戏"
+
+[node name="AtmosphereLayer" type="Control" parent="." unique_id=2147271785]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8")

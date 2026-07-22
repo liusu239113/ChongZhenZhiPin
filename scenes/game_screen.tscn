@@ -1,0 +1,2812 @@
+[gd_scene format=3 uid="uid://ckk4gbphvlq7"]
+
+[ext_resource type="Script" uid="uid://dogfbn3hj2c6k" path="res://scripts/game_screen.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bbpapcmb5yag8" path="res://assets/game_background_v2.webp" id="2"]
+[ext_resource type="Texture2D" uid="uid://bkkvxjt5u7ec1" path="res://assets/map/ming_base_map.webp" id="3"]
+[ext_resource type="Texture2D" uid="uid://dh8xbw42eo5uu" path="res://assets/map/city_marker_current.svg" id="4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_top"]
+content_margin_left = 12.0
+content_margin_top = 0.0
+content_margin_right = 12.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0705882, 0.054902, 0.0392157, 0.9)
+border_width_bottom = 1
+border_color = Color(0.772549, 0.647059, 0.352941, 0.15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_left"]
+content_margin_left = 0.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.043137, 0.031373, 0.023529, 0.95)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_center"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0705882, 0.054902, 0.0392157, 0)
+
+[node name="GameScreen" type="Control" unique_id=118319078]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1808498271]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Overlay" type="TextureRect" parent="." unique_id=615440235]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="MobileGovernanceBackgroundMask" type="ColorRect" parent="." unique_id=246693893]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="MobileEventReadingMask" type="ColorRect" parent="." unique_id=1229365914]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.64)
+
+[node name="MainVBox" type="VBoxContainer" parent="." unique_id=510617718]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TopBar" type="PanelContainer" parent="MainVBox" unique_id=1423265861]
+clip_contents = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_top")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainVBox/TopBar" unique_id=520832116]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 0
+
+[node name="HBox" type="HBoxContainer" parent="MainVBox/TopBar/MarginContainer" unique_id=376486461]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TopLocation" type="HBoxContainer" parent="MainVBox/TopBar/MarginContainer/HBox" unique_id=2068500918]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LocationLabel" type="Label" parent="MainVBox/TopBar/MarginContainer/HBox/TopLocation" unique_id=2068500919]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.85)
+theme_override_font_sizes/font_size = 13
+text = "治所"
+vertical_alignment = 1
+
+[node name="TopLocationButton" type="Button" parent="MainVBox/TopBar/MarginContainer/HBox/TopLocation" unique_id=1175181349]
+visible = false
+custom_minimum_size = Vector2(38, 24)
+layout_mode = 2
+tooltip_text = "打开大明舆图"
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.72)
+theme_override_colors/font_hover_color = Color(0.9, 0.8, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "舆图"
+flat = true
+
+[node name="TopRank" type="Button" parent="MainVBox/TopBar/MarginContainer/HBox" unique_id=235247996]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.83, 0.72, 0.46, 1)
+theme_override_font_sizes/font_size = 13
+text = "正七品 · 知县"
+flat = true
+
+[node name="Spacer" type="Control" parent="MainVBox/TopBar/MarginContainer/HBox" unique_id=1671023031]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResourceBar" type="HBoxContainer" parent="MainVBox/TopBar/MarginContainer/HBox" unique_id=1448222710]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="SilverLabel" type="Label" parent="MainVBox/TopBar/MarginContainer/HBox/ResourceBar" unique_id=1495497767]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "库银: 0"
+
+[node name="GrainLabel" type="Label" parent="MainVBox/TopBar/MarginContainer/HBox/ResourceBar" unique_id=1148643446]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "官粮: 0"
+
+[node name="BingyongLabel" type="Label" parent="MainVBox/TopBar/MarginContainer/HBox/ResourceBar" unique_id=2136984885]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "兵勇: 0"
+
+[node name="PopLabel" type="Label" parent="MainVBox/TopBar/MarginContainer/HBox/ResourceBar" unique_id=1868577699]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "人口: 0"
+
+[node name="RefugeeLabel" type="Label" parent="MainVBox/TopBar/MarginContainer/HBox/ResourceBar" unique_id=1848452156]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "流民: 0"
+
+[node name="Actions" type="HBoxContainer" parent="MainVBox/TopBar/MarginContainer/HBox" unique_id=145275702]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="SaveButton" type="Button" parent="MainVBox/TopBar/MarginContainer/HBox/Actions" unique_id=1477186963]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "存档"
+flat = true
+
+[node name="LoadButton" type="Button" parent="MainVBox/TopBar/MarginContainer/HBox/Actions" unique_id=2044996122]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "读档"
+flat = true
+
+[node name="SettingsButton" type="Button" parent="MainVBox/TopBar/MarginContainer/HBox/Actions" unique_id=1049141590]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "设置"
+flat = true
+
+[node name="TopTurn" type="Label" parent="MainVBox/TopBar/MarginContainer" unique_id=2067126199]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "崇祯元年 · 第一卷"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TopBarUnderline" type="ColorRect" parent="MainVBox" unique_id=836904325]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.5, 0.46, 0.4, 0.55)
+
+[node name="Layout" type="HBoxContainer" parent="MainVBox" unique_id=1533625622]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="LeftPanel" type="PanelContainer" parent="MainVBox/Layout" unique_id=1882733320]
+custom_minimum_size = Vector2(270, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_left")
+
+[node name="LeftShell" type="HBoxContainer" parent="MainVBox/Layout/LeftPanel" unique_id=1603540122]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LeftTabsHost" type="PanelContainer" parent="MainVBox/Layout/LeftPanel/LeftShell" unique_id=597908886]
+layout_mode = 2
+
+[node name="LeftTabs" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost" unique_id=672723136]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+
+[node name="ZhisuTab" type="Button" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost/LeftTabs" unique_id=831070532]
+layout_mode = 2
+size_flags_vertical = 3
+text = "局
+势"
+flat = true
+
+[node name="BuquTab" type="Button" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost/LeftTabs" unique_id=1262841114]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+text = "部
+曲"
+flat = true
+
+[node name="ZengyiTab" type="Button" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost/LeftTabs" unique_id=191216856]
+layout_mode = 2
+size_flags_vertical = 3
+text = "增
+益"
+flat = true
+
+[node name="JushiTab" type="Button" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost/LeftTabs" unique_id=859530058]
+layout_mode = 2
+size_flags_vertical = 3
+text = "个
+人"
+flat = true
+
+[node name="DanganTab" type="Button" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost/LeftTabs" unique_id=1122145403]
+layout_mode = 2
+size_flags_vertical = 3
+text = "档
+案"
+flat = true
+
+[node name="DaojuTab" type="Button" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost/LeftTabs" unique_id=2068500914]
+layout_mode = 2
+size_flags_vertical = 3
+text = "行
+囊"
+flat = true
+
+[node name="LingwuTab" type="Button" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost/LeftTabs" unique_id=1801681114]
+layout_mode = 2
+size_flags_vertical = 3
+text = "识
+悟"
+flat = true
+
+[node name="SheZhiDivider" type="MarginContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost/LeftTabs" unique_id=2068500916]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="DividerLine" type="ColorRect" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost/LeftTabs/SheZhiDivider" unique_id=29773873]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.72, 0.71, 0.68, 0.32)
+
+[node name="SheZhiTab" type="Button" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost/LeftTabs" unique_id=2068500915]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+flat = true
+
+[node name="SheZhiSpacer" type="Control" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftTabsHost/LeftTabs" unique_id=1918649115]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="LeftContent" type="MarginContainer" parent="MainVBox/Layout/LeftPanel/LeftShell" unique_id=1135765208]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="PaneStack" type="Control" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent" unique_id=748877172]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ZhisuPane" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack" unique_id=1455961435]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="ZhisuScroll" type="ScrollContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZhisuPane" unique_id=486865032]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="ZhisuVBox" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZhisuPane/ZhisuScroll" unique_id=1434279519]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+
+[node name="ZhisuSection" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZhisuPane/ZhisuScroll/ZhisuVBox" unique_id=1470933840]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ZhisuTitle" type="Label" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZhisuPane/ZhisuScroll/ZhisuVBox/ZhisuSection" unique_id=413972931]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "治 所"
+horizontal_alignment = 1
+
+[node name="ZhisuPanel" type="PanelContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZhisuPane/ZhisuScroll/ZhisuVBox/ZhisuSection" unique_id=1392287338]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ZhisuInfo" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZhisuPane/ZhisuScroll/ZhisuVBox/ZhisuSection/ZhisuPanel" unique_id=482144753]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="BuquPane" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack" unique_id=216394438]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="BuquScroll" type="ScrollContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/BuquPane" unique_id=758408024]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="BuquVBox" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/BuquPane/BuquScroll" unique_id=53270353]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+
+[node name="BuquSection" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/BuquPane/BuquScroll/BuquVBox" unique_id=32348102]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BuquPanel" type="PanelContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/BuquPane/BuquScroll/BuquVBox/BuquSection" unique_id=1235429245]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="BuquInfo" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/BuquPane/BuquScroll/BuquVBox/BuquSection/BuquPanel" unique_id=304343546]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="ZengyiPane" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack" unique_id=1924422589]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="ZengyiScroll" type="ScrollContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZengyiPane" unique_id=710077931]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="ZengyiVBox" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZengyiPane/ZengyiScroll" unique_id=622948935]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+
+[node name="ZengyiSection" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZengyiPane/ZengyiScroll/ZengyiVBox" unique_id=1158622539]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ZengyiTitle" type="Label" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZengyiPane/ZengyiScroll/ZengyiVBox/ZengyiSection" unique_id=1892676213]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "治 所"
+horizontal_alignment = 1
+
+[node name="ZengyiPanel" type="PanelContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZengyiPane/ZengyiScroll/ZengyiVBox/ZengyiSection" unique_id=237653567]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ZengyiInfo" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/ZengyiPane/ZengyiScroll/ZengyiVBox/ZengyiSection/ZengyiPanel" unique_id=206423588]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="JushiPane" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack" unique_id=1273457606]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="JushiScroll" type="ScrollContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/JushiPane" unique_id=56031993]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="JushiVBox" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/JushiPane/JushiScroll" unique_id=391145510]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+
+[node name="StatsSection" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/JushiPane/JushiScroll/JushiVBox" unique_id=1530552021]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="StatsTitle" type="Label" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/JushiPane/JushiScroll/JushiVBox/StatsSection" unique_id=419928677]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "个 人 禀 赋"
+horizontal_alignment = 1
+
+[node name="StatsPanel" type="PanelContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/JushiPane/JushiScroll/JushiVBox/StatsSection" unique_id=462382047]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="StatsVBox" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/JushiPane/JushiScroll/JushiVBox/StatsSection/StatsPanel" unique_id=1882776469]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AttitudesSection" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/JushiPane/JushiScroll/JushiVBox" unique_id=1086258668]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="AttitudesTitle" type="Label" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/JushiPane/JushiScroll/JushiVBox/AttitudesSection" unique_id=213791773]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "诸 方 态 度"
+horizontal_alignment = 1
+
+[node name="AttitudesPanel" type="PanelContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/JushiPane/JushiScroll/JushiVBox/AttitudesSection" unique_id=60244827]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AttitudesVBox" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/JushiPane/JushiScroll/JushiVBox/AttitudesSection/AttitudesPanel" unique_id=130364683]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DanganPane" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack" unique_id=568731945]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="DanganScroll" type="ScrollContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane" unique_id=1689474515]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="DanganVBox" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane/DanganScroll" unique_id=1331215562]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+
+[node name="ArchiveSection" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane/DanganScroll/DanganVBox" unique_id=547596859]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ArchiveTitle" type="Label" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane/DanganScroll/DanganVBox/ArchiveSection" unique_id=1533091220]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "履 历 身 份"
+horizontal_alignment = 1
+
+[node name="ArchivePanel" type="PanelContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane/DanganScroll/DanganVBox/ArchiveSection" unique_id=831132781]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ArchiveContentMargin" type="MarginContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane/DanganScroll/DanganVBox/ArchiveSection/ArchivePanel" unique_id=645994966]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ArchiveInfo" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane/DanganScroll/DanganVBox/ArchiveSection/ArchivePanel/ArchiveContentMargin" unique_id=504592940]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="TagsSection" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane/DanganScroll/DanganVBox" unique_id=1246840201]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TagsTitle" type="Label" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane/DanganScroll/DanganVBox/TagsSection" unique_id=429339108]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "角 色 标 签"
+horizontal_alignment = 1
+
+[node name="TagsPanel" type="PanelContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane/DanganScroll/DanganVBox/TagsSection" unique_id=123377014]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="TagsContentMargin" type="MarginContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane/DanganScroll/DanganVBox/TagsSection/TagsPanel" unique_id=1914341288]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TagsFlow" type="HFlowContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DanganPane/DanganScroll/DanganVBox/TagsSection/TagsPanel/TagsContentMargin" unique_id=1182494982]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+
+[node name="DaojuPane" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack" unique_id=1540054514]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="ItemsSection" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DaojuPane" unique_id=570323918]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ItemsTitle" type="Label" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DaojuPane/ItemsSection" unique_id=421947178]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "随 身 物 品"
+horizontal_alignment = 1
+
+[node name="ItemsPanel" type="PanelContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DaojuPane/ItemsSection" unique_id=1454234458]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="ItemsScroll" type="ScrollContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DaojuPane/ItemsSection/ItemsPanel" unique_id=1807716904]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="ItemsInfo" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/DaojuPane/ItemsSection/ItemsPanel/ItemsScroll" unique_id=384885466]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="LingwuPane" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack" unique_id=1360028567]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="LingwuSection" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/LingwuPane" unique_id=1578874239]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="LingwuTitle" type="Label" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/LingwuPane/LingwuSection" unique_id=1521924530]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "识 悟"
+horizontal_alignment = 1
+
+[node name="LingwuPanel" type="PanelContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/LingwuPane/LingwuSection" unique_id=111513563]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="LingwuScroll" type="ScrollContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/LingwuPane/LingwuSection/LingwuPanel" unique_id=699407534]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="LingwuInfo" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/LingwuPane/LingwuSection/LingwuPanel/LingwuScroll" unique_id=409602324]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="SheZhiPane" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack" unique_id=384885470]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="SheZhiSection" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/SheZhiPane" unique_id=384885471]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="SheZhiTitle" type="Label" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/SheZhiPane/SheZhiSection" unique_id=384885472]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "设 置"
+horizontal_alignment = 1
+
+[node name="SheZhiPanel" type="PanelContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/SheZhiPane/SheZhiSection" unique_id=384885473]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="SheZhiScroll" type="ScrollContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/SheZhiPane/SheZhiSection/SheZhiPanel" unique_id=384885474]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="SheZhiInfo" type="VBoxContainer" parent="MainVBox/Layout/LeftPanel/LeftShell/LeftContent/PaneStack/SheZhiPane/SheZhiSection/SheZhiPanel/SheZhiScroll" unique_id=384885475]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="CenterPanel" type="PanelContainer" parent="MainVBox/Layout" unique_id=1550030820]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_center")
+
+[node name="CenterMargin" type="MarginContainer" parent="MainVBox/Layout/CenterPanel" unique_id=867201895]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 4
+
+[node name="GovernanceScroll" type="ScrollContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin" unique_id=1714405250]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="GovernanceVBox" type="VBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/GovernanceScroll" unique_id=2025865605]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="GovernanceStage" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/GovernanceScroll/GovernanceVBox" unique_id=154457488]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "第一卷 · 一县泥沼"
+
+[node name="GovernanceTurn" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/GovernanceScroll/GovernanceVBox" unique_id=1402168035]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.74, 0.49, 1)
+theme_override_font_sizes/font_size = 30
+text = "崇祯元年 · 九月"
+
+[node name="Spacer" type="Control" parent="MainVBox/Layout/CenterPanel/CenterMargin/GovernanceScroll/GovernanceVBox" unique_id=1093455423]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ActionPointsRow" type="HBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/GovernanceScroll/GovernanceVBox" unique_id=1418704060]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ActionPointsLabel" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/GovernanceScroll/GovernanceVBox/ActionPointsRow" unique_id=1649106933]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "行动力"
+
+[node name="ActionPointsValue" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/GovernanceScroll/GovernanceVBox/ActionPointsRow" unique_id=1546592612]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.74, 0.49, 1)
+theme_override_font_sizes/font_size = 16
+text = "● ●"
+
+[node name="MonthCardsContainer" type="HFlowContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/GovernanceScroll/GovernanceVBox" unique_id=1393653404]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 16
+
+[node name="ScrollOuter" type="ScrollContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin" unique_id=1525296487]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="EventVBox" type="VBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter" unique_id=599556579]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="TopSpacer" type="Control" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox" unique_id=424698819]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleGroup" type="VBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox" unique_id=1597652551]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="StageLabel" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/TitleGroup" unique_id=934296589]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "第一卷"
+
+[node name="EventDateLabel" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/TitleGroup" unique_id=3761641]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.45, 0.2, 0.88)
+theme_override_font_sizes/font_size = 15
+text = "崇祯五年正月"
+
+[node name="EventTitle" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/TitleGroup" unique_id=1834843747]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.74, 0.49, 1)
+theme_override_font_sizes/font_size = 34
+text = "事件标题"
+
+[node name="TitleRule" type="HSeparator" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox" unique_id=740895398]
+layout_mode = 2
+
+[node name="SpeakerBox" type="VBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox" unique_id=169116206]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="SpeakerHeader" type="HBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/SpeakerBox" unique_id=2003590133]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SpeakerAvatar" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/SpeakerBox/SpeakerHeader" unique_id=1554143213]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.74, 0.49, 1)
+theme_override_font_sizes/font_size = 16
+text = "人"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeakerMeta" type="VBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/SpeakerBox/SpeakerHeader" unique_id=1212360286]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SpeakerName" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/SpeakerBox/SpeakerHeader/SpeakerMeta" unique_id=321957179]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.74, 0.49, 1)
+theme_override_font_sizes/font_size = 15
+text = "说话人"
+
+[node name="SpeakerTags" type="HBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/SpeakerBox/SpeakerHeader/SpeakerMeta" unique_id=1606739713]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SpeakerRole" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/SpeakerBox/SpeakerHeader/SpeakerMeta/SpeakerTags" unique_id=2115058911]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 11
+text = "角色"
+
+[node name="SpeakerFaction" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/SpeakerBox/SpeakerHeader/SpeakerMeta/SpeakerTags" unique_id=144895850]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 11
+text = "阵营"
+
+[node name="SpeakerBubble" type="PanelContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/SpeakerBox" unique_id=868202854]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SpeakerLine" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/SpeakerBox/SpeakerBubble" unique_id=1423570234]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.83, 0.72, 0.46, 1)
+theme_override_font_sizes/font_size = 15
+text = "对白"
+autowrap_mode = 2
+
+[node name="NarrativeLabel" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox" unique_id=645864321]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.83, 0.72, 0.46, 1)
+theme_override_font_sizes/font_size = 17
+text = "叙事文本"
+autowrap_mode = 2
+
+[node name="FlavorPanel" type="PanelContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox" unique_id=659799095]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="FlavorLabel" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/FlavorPanel" unique_id=1804553041]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "氛围文本"
+autowrap_mode = 2
+
+[node name="FocusPanel" type="PanelContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox" unique_id=715420396]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="FocusLabel" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/FocusPanel" unique_id=1246494589]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.74, 0.49, 1)
+theme_override_font_sizes/font_size = 15
+text = "焦点问题"
+autowrap_mode = 2
+
+[node name="ChoicesVBox" type="VBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox" unique_id=1362890432]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ResultPanel" type="PanelContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox" unique_id=1411626972]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ResultVBox" type="VBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/ResultPanel" unique_id=336116792]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ChosenChoiceBox" type="PanelContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/ResultPanel/ResultVBox" unique_id=1402502197]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ChosenChoiceVBox" type="VBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/ResultPanel/ResultVBox/ChosenChoiceBox" unique_id=1036203268]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ChosenChoiceTitle" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/ResultPanel/ResultVBox/ChosenChoiceBox/ChosenChoiceVBox" unique_id=229130796]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.74, 0.49, 1)
+theme_override_font_sizes/font_size = 16
+text = "【闭城死守】"
+autowrap_mode = 2
+
+[node name="ChosenChoiceDesc" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/ResultPanel/ResultVBox/ChosenChoiceBox/ChosenChoiceVBox" unique_id=998519799]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "城门落锁，宵禁令贴满街巷。"
+autowrap_mode = 2
+
+[node name="ResultTitle" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/ResultPanel/ResultVBox" unique_id=1249616997]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 0.7)
+theme_override_font_sizes/font_size = 12
+text = "结 算"
+horizontal_alignment = 1
+
+[node name="ResultChanges" type="FlowContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/ResultPanel/ResultVBox" unique_id=1124058638]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+
+[node name="ResultItems" type="VBoxContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/ResultPanel/ResultVBox" unique_id=2004499939]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ResultTags" type="FlowContainer" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/ResultPanel/ResultVBox" unique_id=963463045]
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+
+[node name="ResultComment" type="Label" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/ResultPanel/ResultVBox" unique_id=1911471702]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "系统批语"
+autowrap_mode = 2
+
+[node name="NextButton" type="Button" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox/ResultPanel/ResultVBox" unique_id=325326128]
+custom_minimum_size = Vector2(220, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "确 定"
+
+[node name="EventBottomSpacer" type="Control" parent="MainVBox/Layout/CenterPanel/CenterMargin/ScrollOuter/EventVBox" unique_id=555853507]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="MobileInfoPanel" type="PanelContainer" parent="MainVBox" unique_id=15973567]
+visible = false
+custom_minimum_size = Vector2(0, 176)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_left")
+
+[node name="MobileInfoMargin" type="MarginContainer" parent="MainVBox/MobileInfoPanel" unique_id=1098514686]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 8
+
+[node name="MobileInfoScroll" type="ScrollContainer" parent="MainVBox/MobileInfoPanel/MobileInfoMargin" unique_id=896521811]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="MobileInfoHost" type="Control" parent="MainVBox/MobileInfoPanel/MobileInfoMargin/MobileInfoScroll" unique_id=935363866]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MobileBottomTabs" type="HBoxContainer" parent="MainVBox" unique_id=719824344]
+visible = false
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MobileJushiTab" type="Button" parent="MainVBox/MobileBottomTabs" unique_id=1608457350]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "个人"
+
+[node name="MobileDanganTab" type="Button" parent="MainVBox/MobileBottomTabs" unique_id=63440599]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "档案"
+
+[node name="MobileDaojuTab" type="Button" parent="MainVBox/MobileBottomTabs" unique_id=2050033181]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "行囊"
+
+[node name="MobileLingwuTab" type="Button" parent="MainVBox/MobileBottomTabs" unique_id=541094605]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "识悟"
+
+[node name="SettingsPopup" type="PanelContainer" parent="." unique_id=228792524]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="SettingsPopup" unique_id=845847338]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="MusicButton" type="Button" parent="SettingsPopup/VBox" unique_id=1050921103]
+layout_mode = 2
+text = "音乐"
+
+[node name="RestartButton" type="Button" parent="SettingsPopup/VBox" unique_id=1587425633]
+layout_mode = 2
+text = "重新开始"
+
+[node name="FullscreenButton" type="Button" parent="SettingsPopup/VBox" unique_id=1723721665]
+layout_mode = 2
+text = "全屏"
+
+[node name="CloseSettingsButton" type="Button" parent="SettingsPopup/VBox" unique_id=657433390]
+layout_mode = 2
+text = "关闭"
+
+[node name="MingMapOverlay" type="Control" parent="." unique_id=82719397]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MingMapDimmer" type="ColorRect" parent="MingMapOverlay" unique_id=650010940]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.02, 0.014, 0.009, 0.78)
+
+[node name="MingMapPanel" type="PanelContainer" parent="MingMapOverlay" unique_id=361953713]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -560.0
+offset_top = -352.0
+offset_right = 560.0
+offset_bottom = 352.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MingMapMargin" type="MarginContainer" parent="MingMapOverlay/MingMapPanel" unique_id=2022774444]
+layout_mode = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 22
+
+[node name="MingMapVBox" type="VBoxContainer" parent="MingMapOverlay/MingMapPanel/MingMapMargin" unique_id=794554214]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="MingMapHeader" type="HBoxContainer" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox" unique_id=1630250848]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="MingMapTitleStack" type="VBoxContainer" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapHeader" unique_id=69517042]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="MingMapTitle" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapHeader/MingMapTitleStack" unique_id=175552499]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.74, 0.49, 1)
+theme_override_font_sizes/font_size = 26
+text = "大 明 舆 图"
+
+[node name="MingMapModeTabs" type="HBoxContainer" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapHeader" unique_id=2027346098]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="MingMapModeRenDiButton" type="Button" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapHeader/MingMapModeTabs" unique_id=1585607412]
+custom_minimum_size = Vector2(56, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "任地"
+flat = true
+
+[node name="MingMapModeMinShengButton" type="Button" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapHeader/MingMapModeTabs" unique_id=1672336124]
+custom_minimum_size = Vector2(56, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "民生"
+flat = true
+
+[node name="MingMapModeJunWuButton" type="Button" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapHeader/MingMapModeTabs" unique_id=1913360122]
+custom_minimum_size = Vector2(56, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "军务"
+flat = true
+
+[node name="MingMapResetZoomButton" type="Button" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapHeader" unique_id=856555330]
+custom_minimum_size = Vector2(58, 34)
+layout_mode = 2
+tooltip_text = "重置舆图缩放"
+theme_override_colors/font_color = Color(0.76, 0.72, 0.66, 0.72)
+theme_override_colors/font_hover_color = Color(0.9, 0.8, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "归位"
+flat = true
+
+[node name="MingMapCloseButton" type="Button" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapHeader" unique_id=944702731]
+custom_minimum_size = Vector2(42, 34)
+layout_mode = 2
+tooltip_text = "关闭舆图"
+theme_override_colors/font_color = Color(0.76, 0.72, 0.66, 0.72)
+theme_override_colors/font_hover_color = Color(0.9, 0.8, 0.6, 1)
+theme_override_font_sizes/font_size = 20
+text = "×"
+flat = true
+
+[node name="MingMapFrame" type="PanelContainer" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox" unique_id=2007179417]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MingMapCanvas" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame" unique_id=341218089]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MingMapViewport" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas" unique_id=208655213]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MingMapPaperFill" type="ColorRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport" unique_id=1323368417]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.964706, 0.882353, 0.760784, 1)
+
+[node name="MingMapZoomRoot" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport" unique_id=171135526]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MingMapAspectRatio" type="AspectRatioContainer" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot" unique_id=1194800765]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.3269054
+
+[node name="MingMapBase" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio" unique_id=524966038]
+layout_mode = 2
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MingMapProvinceLayer" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio" unique_id=577698160]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MingMapMarkerLayer" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio" unique_id=417693871]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MapMarker_beijing" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=2123901046]
+anchors_preset = 0
+anchor_left = 0.693254
+anchor_top = 0.194
+anchor_right = 0.693254
+anchor_bottom = 0.194
+mouse_filter = 2
+metadata/map_key = "beijing"
+metadata/map_label = "顺天府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_beijing" unique_id=302355672]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -26.891602
+offset_top = -54.028
+offset_right = -4.8916016
+offset_bottom = -30.028
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "◎"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_beijing" unique_id=539322015]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_beijing" unique_id=1524559879]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -6.8916016
+offset_top = -55.028
+offset_right = 69.1084
+offset_bottom = -31.028
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "顺天府"
+vertical_alignment = 1
+
+[node name="MapMarker_nanjing" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1429331327]
+anchors_preset = 0
+anchor_left = 0.810474
+anchor_top = 0.624
+anchor_right = 0.810474
+anchor_bottom = 0.624
+mouse_filter = 2
+metadata/map_key = "nanjing"
+metadata/map_label = "应天府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_nanjing" unique_id=1549925943]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -34.82605
+offset_top = -93.68802
+offset_right = -12.82605
+offset_bottom = -69.68802
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "◎"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_nanjing" unique_id=1247897757]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_nanjing" unique_id=290476541]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -109.82605
+offset_top = -93.68802
+offset_right = -33.82605
+offset_bottom = -69.68802
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "应天府"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_qingan" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1299863508]
+anchors_preset = 0
+anchor_left = 0.802768
+anchor_top = 0.277574
+anchor_right = 0.802768
+anchor_bottom = 0.277574
+mouse_filter = 2
+metadata/map_key = "qingan"
+metadata/map_label = "蓬莱县"
+metadata/map_kind = "major"
+metadata/map_act = "1"
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_qingan" unique_id=799064071]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_qingan" unique_id=1717912085]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_qingan" unique_id=454365686]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = 18.0
+offset_top = -14.0
+offset_right = 134.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "蓬莱县"
+vertical_alignment = 1
+
+[node name="MapMarker_puzhou" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=880307333]
+anchors_preset = 0
+anchor_left = 0.600692
+anchor_top = 0.417279
+anchor_right = 0.600692
+anchor_bottom = 0.417279
+mouse_filter = 2
+metadata/map_key = "puzhou"
+metadata/map_label = "蒲州"
+metadata/map_kind = "major"
+metadata/map_act = "2"
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_puzhou" unique_id=107126245]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_puzhou" unique_id=315200584]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_puzhou" unique_id=1695412024]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -132.0
+offset_top = -14.0
+offset_right = -16.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "蒲州"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_baoyang" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=73864260]
+anchors_preset = 0
+anchor_left = 0.697578
+anchor_top = 0.303309
+anchor_right = 0.697578
+anchor_bottom = 0.303309
+mouse_filter = 2
+metadata/map_key = "baoyang"
+metadata/map_label = "真定府"
+metadata/map_kind = "major"
+metadata/map_act = "3"
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_baoyang" unique_id=227425203]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_baoyang" unique_id=948461231]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_baoyang" unique_id=1615619105]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = 18.0
+offset_top = -14.0
+offset_right = 134.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "真定府"
+vertical_alignment = 1
+
+[node name="MapMarker_anling" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1631552710]
+anchors_preset = 0
+anchor_left = 0.604152
+anchor_top = 0.584559
+anchor_right = 0.604152
+anchor_bottom = 0.584559
+mouse_filter = 2
+metadata/map_key = "anling"
+metadata/map_label = "襄阳府"
+metadata/map_kind = "major"
+metadata/map_act = "4"
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_anling" unique_id=522091639]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_anling" unique_id=1249542409]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_anling" unique_id=662054784]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = 18.0
+offset_top = -14.0
+offset_right = 134.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "襄阳府"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_chengdu" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1771927291]
+anchors_preset = 0
+anchor_left = 0.560194
+anchor_top = 0.65
+anchor_right = 0.560194
+anchor_bottom = 0.65
+mouse_filter = 2
+metadata/map_key = "chengdu"
+metadata/map_label = "成都府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_chengdu" unique_id=1810899015]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -180.96631
+offset_top = -91.29999
+offset_right = -158.96631
+offset_bottom = -68.29999
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_chengdu" unique_id=117731596]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_chengdu" unique_id=25875033]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -258.9663
+offset_top = -94.29999
+offset_right = -182.96631
+offset_bottom = -70.29999
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "成都府"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_yanchang" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1690091778]
+anchors_preset = 0
+anchor_left = 0.519031
+anchor_top = 0.3125
+anchor_right = 0.519031
+anchor_bottom = 0.3125
+mouse_filter = 2
+metadata/map_key = "yanchang"
+metadata/map_label = "延庆道"
+metadata/map_kind = "major"
+metadata/map_act = "5"
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_yanchang" unique_id=1400276548]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_yanchang" unique_id=573873430]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_yanchang" unique_id=2130321116]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -132.0
+offset_top = -14.0
+offset_right = -16.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "延庆道"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_jinan" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1367039850]
+anchors_preset = 0
+anchor_left = 0.76609
+anchor_top = 0.337316
+anchor_right = 0.76609
+anchor_bottom = 0.337316
+mouse_filter = 2
+metadata/map_key = "jinan"
+metadata/map_label = "济南府"
+metadata/map_kind = "major"
+metadata/map_act = "6"
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_jinan" unique_id=533515515]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_jinan" unique_id=1770236029]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_jinan" unique_id=804943076]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = 18.0
+offset_top = -14.0
+offset_right = 134.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "济南府"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_dengzhou" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1657191896]
+anchors_preset = 0
+anchor_left = 0.861163
+anchor_top = 0.398
+anchor_right = 0.861163
+anchor_bottom = 0.398
+mouse_filter = 2
+metadata/map_key = "dengzhou"
+metadata/map_label = "登州"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_dengzhou" unique_id=1378834363]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -77.79724
+offset_top = -104.675995
+offset_right = -55.79724
+offset_bottom = -81.675995
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_dengzhou" unique_id=676718838]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_dengzhou" unique_id=835606485]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -32.79724
+offset_top = -129.676
+offset_right = 43.20276
+offset_bottom = -105.675995
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "登州"
+vertical_alignment = 1
+
+[node name="MapMarker_laizhou" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=2137003403]
+anchors_preset = 0
+anchor_left = 0.829482
+anchor_top = 0.375
+anchor_right = 0.829482
+anchor_bottom = 0.375
+mouse_filter = 2
+metadata/map_key = "laizhou"
+metadata/map_label = "莱州"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_laizhou" unique_id=1278805006]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -30.815002
+offset_top = -110.75
+offset_right = -8.815002
+offset_bottom = -87.75
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_laizhou" unique_id=1353473462]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_laizhou" unique_id=211121365]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -67.815
+offset_top = -105.75
+offset_right = 8.184998
+offset_bottom = -81.75
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "莱州"
+vertical_alignment = 1
+
+[node name="MapMarker_fuzhou" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=564268599]
+anchors_preset = 0
+anchor_left = 0.7577493
+anchor_top = 0.7289272
+anchor_right = 0.7577493
+anchor_bottom = 0.7289272
+mouse_filter = 2
+metadata/map_key = "fuzhou"
+metadata/map_label = "福州府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_fuzhou" unique_id=1837582289]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 1.4290771
+offset_top = -26.657104
+offset_right = 23.429077
+offset_bottom = -3.6571045
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_fuzhou" unique_id=2117375643]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_fuzhou" unique_id=401272651]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -59.570923
+offset_top = -41.657104
+offset_right = 16.429077
+offset_bottom = -17.657104
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "福州府"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_taiyuan" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=2104336236]
+anchors_preset = 0
+anchor_left = 0.522177
+anchor_top = 0.36
+anchor_right = 0.522177
+anchor_bottom = 0.36
+mouse_filter = 2
+metadata/map_key = "taiyuan"
+metadata/map_label = "太原府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_taiyuan" unique_id=796771122]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 7.012268
+offset_top = -103.32001
+offset_right = 29.012268
+offset_bottom = -80.32001
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_taiyuan" unique_id=1331609352]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_taiyuan" unique_id=1414013755]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -68.98773
+offset_top = -105.32001
+offset_right = 7.012268
+offset_bottom = -81.32001
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "太原府"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_nanchang" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=462559817]
+anchors_preset = 0
+anchor_left = 0.5273112
+anchor_top = 0.6427203
+anchor_right = 0.5273112
+anchor_bottom = 0.6427203
+mouse_filter = 2
+metadata/map_key = "nanchang"
+metadata/map_label = "南昌府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_nanchang" unique_id=1043447758]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 87.773926
+offset_top = -34.2088
+offset_right = 109.773926
+offset_bottom = -11.208801
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_nanchang" unique_id=1727198068]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_nanchang" unique_id=212873432]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = 108.773926
+offset_top = -34.2088
+offset_right = 184.77393
+offset_bottom = -10.208801
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "南昌府"
+vertical_alignment = 1
+
+[node name="MapMarker_changsha" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=153080403]
+anchors_preset = 0
+anchor_left = 0.32077032
+anchor_top = 0.6963602
+anchor_right = 0.32077032
+anchor_bottom = 0.6963602
+mouse_filter = 2
+metadata/map_key = "changsha"
+metadata/map_label = "长沙府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_changsha" unique_id=2108036885]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -9.9539795
+offset_top = -29.354431
+offset_right = 12.0460205
+offset_bottom = -6.354431
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_changsha" unique_id=517198486]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_changsha" unique_id=1679832510]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = 103.04602
+offset_top = -58.35443
+offset_right = 179.04602
+offset_bottom = -34.35443
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "长沙府"
+vertical_alignment = 1
+
+[node name="MapMarker_guiyang" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1551722611]
+anchors_preset = 0
+anchor_left = 0.5273112
+anchor_top = 0.8515326
+anchor_right = 0.5273112
+anchor_bottom = 0.8515326
+mouse_filter = 2
+metadata/map_key = "guiyang"
+metadata/map_label = "贵阳府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_guiyang" unique_id=742445754]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 3.7739258
+offset_top = -32.56128
+offset_right = 25.773926
+offset_bottom = -9.561279
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_guiyang" unique_id=352934267]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_guiyang" unique_id=355747253]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -120.226074
+offset_top = -118.56128
+offset_right = -44.226074
+offset_bottom = -94.56128
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "贵阳府"
+vertical_alignment = 1
+
+[node name="MapMarker_datong" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=264666505]
+anchors_preset = 0
+anchor_left = 0.560194
+anchor_top = 0.21
+anchor_right = 0.560194
+anchor_bottom = 0.21
+mouse_filter = 2
+metadata/map_key = "datong"
+metadata/map_label = "大同"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_datong" unique_id=2058334351]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 20.033691
+offset_top = -73.01999
+offset_right = 42.03369
+offset_bottom = -50.01999
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_datong" unique_id=114332310]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_datong" unique_id=791197310]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -52.96631
+offset_top = -73.01999
+offset_right = 23.033691
+offset_bottom = -49.01999
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "大同"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_kaifeng" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1383582778]
+anchors_preset = 0
+anchor_left = 0.647317
+anchor_top = 0.492
+anchor_right = 0.647317
+anchor_bottom = 0.492
+mouse_filter = 2
+metadata/map_key = "kaifeng"
+metadata/map_label = "开封府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_kaifeng" unique_id=668962419]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -26.917603
+offset_top = -99.504
+offset_right = -4.9176025
+offset_bottom = -76.504
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_kaifeng" unique_id=206474835]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_kaifeng" unique_id=983648956]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -23.917603
+offset_top = -86.504
+offset_right = 52.082397
+offset_bottom = -62.503998
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "开封府"
+vertical_alignment = 1
+
+[node name="MapMarker_luoyang" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1550428978]
+anchors_preset = 0
+anchor_left = 0.557026
+anchor_top = 0.525
+anchor_right = 0.557026
+anchor_bottom = 0.525
+mouse_filter = 2
+metadata/map_key = "luoyang"
+metadata/map_label = "洛阳"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_luoyang" unique_id=1343250336]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -14.96814
+offset_top = -135.04999
+offset_right = 7.0318604
+offset_bottom = -112.04999
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_luoyang" unique_id=90625560]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_luoyang" unique_id=459453983]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -15.96814
+offset_top = -151.04999
+offset_right = 60.03186
+offset_bottom = -127.04999
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "洛阳"
+vertical_alignment = 1
+
+[node name="MapMarker_xian" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=2001568118]
+anchors_preset = 0
+anchor_left = 0.363772
+anchor_top = 0.595
+anchor_right = 0.363772
+anchor_bottom = 0.595
+mouse_filter = 2
+metadata/map_key = "xian"
+metadata/map_label = "西安府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_xian" unique_id=102907398]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 32.923462
+offset_top = -144.39001
+offset_right = 54.923462
+offset_bottom = -121.390015
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_xian" unique_id=749985681]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_xian" unique_id=595487952]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -44.076538
+offset_top = -146.39001
+offset_right = 31.923462
+offset_bottom = -122.390015
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "西安府"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_tongguan" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=340321068]
+anchors_preset = 0
+anchor_left = 0.446142
+anchor_top = 0.574
+anchor_right = 0.446142
+anchor_bottom = 0.574
+mouse_filter = 2
+metadata/map_key = "tongguan"
+metadata/map_label = "潼关"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_tongguan" unique_id=1906113693]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 10.969971
+offset_top = -139.58801
+offset_right = 32.96997
+offset_bottom = -116.58801
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_tongguan" unique_id=1721700636]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_tongguan" unique_id=90419409]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = 14.969971
+offset_top = -124.58801
+offset_right = 90.96997
+offset_bottom = -100.58801
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "潼关"
+vertical_alignment = 1
+
+[node name="MapMarker_wuchang" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=35455901]
+anchors_preset = 0
+anchor_left = 0.629892
+anchor_top = 0.72
+anchor_right = 0.629892
+anchor_bottom = 0.72
+mouse_filter = 2
+metadata/map_key = "wuchang"
+metadata/map_label = "武昌府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_wuchang" unique_id=1094518589]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 43.072876
+offset_top = -222.64001
+offset_right = 65.072876
+offset_bottom = -199.64001
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_wuchang" unique_id=1843065448]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_wuchang" unique_id=1419882884]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -27.927124
+offset_top = -118.640015
+offset_right = 48.072876
+offset_bottom = -94.640015
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "武昌府"
+vertical_alignment = 1
+
+[node name="MapMarker_xiangyang" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1116788683]
+anchors_preset = 0
+anchor_left = 0.557026
+anchor_top = 0.635
+anchor_right = 0.557026
+anchor_bottom = 0.635
+mouse_filter = 2
+metadata/map_key = "xiangyang"
+metadata/map_label = "襄阳"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_xiangyang" unique_id=1415007437]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -27.96814
+offset_top = -104.869995
+offset_right = -5.9681396
+offset_bottom = -81.869995
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_xiangyang" unique_id=770777961]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_xiangyang" unique_id=16711383]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -103.96814
+offset_top = -105.869995
+offset_right = -27.96814
+offset_bottom = -81.869995
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "襄阳"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_guangzhou" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=340831776]
+anchors_preset = 0
+anchor_left = 0.5785197
+anchor_top = 0.5316092
+anchor_right = 0.5785197
+anchor_bottom = 0.5316092
+mouse_filter = 2
+metadata/map_key = "guangzhou"
+metadata/map_label = "广州府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "left"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_guangzhou" unique_id=575345431]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 5.4750977
+offset_top = -25.764343
+offset_right = 27.475098
+offset_bottom = -2.7643433
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_guangzhou" unique_id=660540566]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_guangzhou" unique_id=31780071]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -74.5249
+offset_top = 132.23566
+offset_right = 1.4750977
+offset_bottom = 156.23566
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "广州府"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MapMarker_huai_an" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=652872317]
+anchors_preset = 0
+anchor_left = 0.823146
+anchor_top = 0.538
+anchor_right = 0.823146
+anchor_bottom = 0.538
+mouse_filter = 2
+metadata/map_key = "huai_an"
+metadata/map_label = "淮安"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_huai_an" unique_id=1228208723]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -20.818665
+offset_top = -40.355988
+offset_right = 1.1813354
+offset_bottom = -17.355988
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_huai_an" unique_id=595260587]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_huai_an" unique_id=572859748]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -31.818665
+offset_top = -99.35599
+offset_right = 44.181335
+offset_bottom = -75.35599
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "淮安"
+vertical_alignment = 1
+
+[node name="MapMarker_xuzhou" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=1934123314]
+anchors_preset = 0
+anchor_left = 0.745528
+anchor_top = 0.488
+anchor_right = 0.745528
+anchor_bottom = 0.488
+mouse_filter = 2
+metadata/map_key = "xuzhou"
+metadata/map_label = "徐州"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_xuzhou" unique_id=329078970]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -129.86249
+offset_top = 58.743988
+offset_right = -107.86249
+offset_bottom = 81.74399
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_xuzhou" unique_id=1757128844]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_xuzhou" unique_id=1429417205]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -10.862488
+offset_top = -94.25601
+offset_right = 65.13751
+offset_bottom = -70.25601
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "徐州"
+vertical_alignment = 1
+
+[node name="MapMarker_yangzhou" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=536144381]
+anchors_preset = 0
+anchor_left = 0.848491
+anchor_top = 0.595
+anchor_right = 0.848491
+anchor_bottom = 0.595
+mouse_filter = 2
+metadata/map_key = "yangzhou"
+metadata/map_label = "扬州"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_yangzhou" unique_id=274395855]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -56.804626
+offset_top = -102.390015
+offset_right = -34.804626
+offset_bottom = -79.390015
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_yangzhou" unique_id=984884088]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_yangzhou" unique_id=1317940200]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -38.804626
+offset_top = -103.390015
+offset_right = 37.195374
+offset_bottom = -79.390015
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "扬州"
+vertical_alignment = 1
+
+[node name="MapMarker_suzhou" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=783868086]
+anchors_preset = 0
+anchor_left = 0.864331
+anchor_top = 0.67
+anchor_right = 0.864331
+anchor_bottom = 0.67
+mouse_filter = 2
+metadata/map_key = "suzhou"
+metadata/map_label = "苏州"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_suzhou" unique_id=1188925094]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = -76.79541
+offset_top = -173.54001
+offset_right = -54.79541
+offset_bottom = -150.54001
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_suzhou" unique_id=1568351732]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_suzhou" unique_id=1140325221]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = -24.79541
+offset_top = -114.54001
+offset_right = 51.20459
+offset_bottom = -90.54001
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "苏州"
+vertical_alignment = 1
+
+[node name="MapMarker_hangzhou" type="Control" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer" unique_id=399624271]
+anchors_preset = 0
+anchor_left = 0.705
+anchor_top = 0.735
+anchor_right = 0.705
+anchor_bottom = 0.735
+mouse_filter = 2
+metadata/map_key = "hangzhou"
+metadata/map_label = "杭州府"
+metadata/map_kind = "major"
+metadata/map_act = ""
+metadata/map_side = "right"
+metadata/map_dx = 0.0
+metadata/map_dy = 0.0
+
+[node name="Dot" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_hangzhou" unique_id=799920231]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 33.69983
+offset_top = -134.07
+offset_right = 55.69983
+offset_bottom = -112.07001
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "○"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentDot" type="TextureRect" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_hangzhou" unique_id=1535429992]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4")
+
+[node name="CityLabel" type="Label" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox/MingMapFrame/MingMapCanvas/MingMapViewport/MingMapZoomRoot/MingMapAspectRatio/MingMapMarkerLayer/MapMarker_hangzhou" unique_id=525617803]
+custom_minimum_size = Vector2(76, 24)
+layout_mode = 0
+offset_left = 35.69983
+offset_top = -122.07001
+offset_right = 111.69983
+offset_bottom = -98.07001
+theme_override_colors/font_color = Color(0.16, 0.13, 0.1, 0.62)
+theme_override_colors/font_outline_color = Color(0.92, 0.82, 0.6, 0.82)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "杭州府"
+vertical_alignment = 1
+
+[node name="MingMapDetailLabel" type="RichTextLabel" parent="MingMapOverlay/MingMapPanel/MingMapMargin/MingMapVBox" unique_id=345131437]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.76, 0.7, 0.58, 0.92)
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "点击任地可查看舆图。"
+fit_content = true
+scroll_active = false

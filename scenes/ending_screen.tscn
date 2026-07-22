@@ -1,0 +1,163 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://b6b64u33galg1" path="res://scripts/ending_screen.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bf0w1g07g6yl3" path="res://assets/choose-bg.webp" id="2"]
+
+[node name="EndingScreen" type="Control" unique_id=207423496]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="." unique_id=541505497]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.07, 0.06, 1)
+
+[node name="BgTexture" type="TextureRect" parent="." unique_id=1332526127]
+modulate = Color(1, 1, 1, 0.1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1293548481]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -280.0
+offset_right = 350.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBox" type="VBoxContainer" parent="ScrollContainer" unique_id=670390242]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+
+[node name="SpacerTop" type="Control" parent="ScrollContainer/VBox" unique_id=1974591505]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="EndingBadge" type="Label" parent="ScrollContainer/VBox" unique_id=1971665014]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "终 局"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndingTitle" type="Label" parent="ScrollContainer/VBox" unique_id=149628927]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.77, 0.65, 0.35, 1)
+theme_override_font_sizes/font_size = 36
+text = "结局标题"
+horizontal_alignment = 1
+
+[node name="EndingEmotion" type="Label" parent="ScrollContainer/VBox" unique_id=1273450614]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.5, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "情感标签"
+horizontal_alignment = 1
+
+[node name="HeaderBodyGap" type="Control" parent="ScrollContainer/VBox" unique_id=1645416971]
+layout_mode = 2
+
+[node name="EndingNarrative" type="Label" parent="ScrollContainer/VBox" unique_id=1205051659]
+layout_mode = 2
+theme_override_constants/line_spacing = 8
+theme_override_font_sizes/font_size = 16
+text = "结局叙述"
+autowrap_mode = 2
+
+[node name="CommentGapTop" type="Control" parent="ScrollContainer/VBox" unique_id=746446619]
+layout_mode = 2
+
+[node name="EndingCommentLabel" type="Label" parent="ScrollContainer/VBox" unique_id=451377018]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.45, 0.3, 1)
+theme_override_font_sizes/font_size = 14
+text = "— 回声 —"
+horizontal_alignment = 1
+
+[node name="EndingComment" type="Label" parent="ScrollContainer/VBox" unique_id=1589034345]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.6, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+text = "系统批语"
+autowrap_mode = 2
+
+[node name="CommentGapBottom" type="Control" parent="ScrollContainer/VBox" unique_id=180744066]
+layout_mode = 2
+
+[node name="StatsTitle" type="Label" parent="ScrollContainer/VBox" unique_id=814331439]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.48, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "最终状态"
+horizontal_alignment = 1
+
+[node name="StatsContainer" type="HFlowContainer" parent="ScrollContainer/VBox" unique_id=840366015]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+alignment = 1
+
+[node name="TagsTitle" type="Label" parent="ScrollContainer/VBox" unique_id=1532886557]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.48, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "角色标签"
+horizontal_alignment = 1
+
+[node name="TagsContainer" type="HFlowContainer" parent="ScrollContainer/VBox" unique_id=631111832]
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+alignment = 1
+
+[node name="Spacer" type="Control" parent="ScrollContainer/VBox" unique_id=754533434]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="ActionButtons" type="HBoxContainer" parent="ScrollContainer/VBox" unique_id=73705278]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 14
+
+[node name="BiographyButton" type="Button" parent="ScrollContainer/VBox/ActionButtons" unique_id=2014076315]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "查看生平小传"
+
+[node name="PlayAgainButton" type="Button" parent="ScrollContainer/VBox/ActionButtons" unique_id=1455810358]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "重 新 来 过"
+
+[node name="SpacerBottom" type="Control" parent="ScrollContainer/VBox" unique_id=916703855]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2

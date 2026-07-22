@@ -1,0 +1,12 @@
+# Godot auto-generated
+.godot/
+.autoconverted/
+dexopt/
+*.sparsepck
+gdre_export.log
+_cl_
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
